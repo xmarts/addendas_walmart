@@ -63,24 +63,9 @@
     </t>
   </t>
   <t t-set="numcertif" t-value="record.company_id.field_num_certificate"/>
-        <t t-set="inv" t-value="0"/>
-        <t t-set="ref" t-value="0"/>
-         <t t-foreach="record" t-as="tt">
-           <t t-if="tt.type == 'out_invoice'">
-             <t t-set="inv" t-value="inv + 1"/>
-             </t>
-             <t t-if="tt.type == 'out_refund'">
-               <t t-set="ref" t-value="ref + 1"/>
-               </t>
-               </t>
-            <t t-if="inv == 1">
-                <t t-set="taghuno" t-value="' [H1]'+lin+serie+lin+folio+lin+str(numcertif)+lin+fecha+lin+str(numor)+lin+str(fechor)+lin+'PPD-Pago en parcialidades o diferido'+lin+condp+lin+fundo+   lin+'FACTURA COMERCIAL'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+'2012'+lin+lin+lin+lin+str(numpr)+lin+tsiva+lin+str(numti)+   lin+lin+lin+lin+'Credito'+lin+moned+lin+lin+str(fenac)+lin+str(namcomercial)+lin+lin+lin+lin+lin+lin+lin+lin+lin+totex+lin+ilcfd+lin+   'P'+lin+lin+'1'+lin+lin+'0'+lin+lin+lin"/>
 
-            </t>
-              <t t-if="ref == 1">
-                  <t t-set="taghuno" t-value="' [H1]'+lin+serie+lin+folio+lin+str(numcertif)+lin+fecha+lin+str(numor)+lin+str(fechor)+lin+'PPD-Pago en parcialidades o diferido'+lin+condp+lin+fundo+   lin+'NOTA DE CREDITO'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+'2012'+lin+lin+lin+lin+str(numpr)+lin+tsiva+lin+str(numti)+   lin+lin+lin+lin+'Credito'+lin+moned+lin+lin+str(fenac)+lin+str(namcomercial)+lin+lin+lin+lin+lin+lin+lin+lin+lin+totex+lin+ilcfd+lin+   'P'+lin+lin+'1'+lin+lin+'0'+lin+lin+lin"/>
- 
-                </t>
+    <t t-set="taghuno" t-value="' [H1]'+lin+serie+lin+folio+lin+str(numcertif)+lin+fecha+lin+str(numor)+lin+str(fechor)+lin+'PPD-Pago en parcialidades o diferido'+lin+condp+lin+fundo+   lin+'FACTURA COMERCIAL'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+'2012'+lin+lin+lin+lin+str(numpr)+lin+tsiva+lin+str(numti)+   lin+lin+lin+lin+'Credito'+lin+moned+lin+lin+str(fenac)+lin+str(namcomercial)+lin+lin+lin+lin+lin+lin+lin+lin+lin+totex+lin+ilcfd+lin+   'P'+lin+lin+'1'+lin+lin+'0'+lin+lin+lin"/>
+
                
 
   <!-- Datos de la etiqueta H2 -->
