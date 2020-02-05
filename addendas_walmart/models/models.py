@@ -5,4 +5,4 @@ from odoo import models, fields, api
 class AddFieldsAdendaWalmart(models.Model):
     _inherit = 'res.partner'
 
-    child_contact_name1 = fields.Char(string="Child Contact Name")
+    addres_contact_name = fields.Char(string="Child Contact Name")
