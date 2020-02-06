@@ -205,7 +205,7 @@
   <t t-set="zipco" t-value="record.company_id.zip"/>
   <t t-set="accountno" t-value="record.partner_bank_id.acc_number"/>
   <t t-if="accountno == False"> 
-    <t t-set="accountno" t-value="record.partner_id.bank_ids.acc_number"/>
+    <t t-set="accountno" t-value="record.partner_id.bank_ids.last_acc_number"/>
   </t>
   <t t-set="rfcco" t-value="xml.Emisor.get('Rfc')"/>
   <t t-set="namco" t-value="xml.Emisor.get('Nombre')"/>
