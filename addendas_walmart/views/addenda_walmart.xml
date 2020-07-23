@@ -2,7 +2,7 @@
 <odoo>
   <data noupdate="0">
 <template name="Walmart" id="add_walmart">
-    <t t-set="xml" t-value="record.l10n_mx_edi_get_xml_etree()"/>
+      <t t-set="xml" t-value="record.l10n_mx_edi_get_xml_etree()"/>
   <t t-set="sdato" t-value="'FaltaDato'"/>
   <t t-set="lin" t-value="'|'"/>
   
@@ -133,7 +133,7 @@
   
   <!-- Datos de la etiqueta D -->
   
-  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.product_uom_qty)+lin+x.product_uom.name+lin+str(x.product_id.product_units)+lin+str(round((x.price_subtotal/x.product_uom_qty),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.tax_id))+str(int(x.product_uom_qty))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str(x.price_subtotal)+lin+str(x.price_subtotal)+lin+str(x.price_tax)+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.fields_sales.order_line))"/>
+  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str(round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.invoice_line_tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str(x.price_subtotal)+lin+str(x.price_subtotal)+lin+str(x.price_tax)+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
   <!-- Falta confirmacion de dato -->
   <t t-set="ordercomp" t-value="record.fields_sales.number_order"/>
   <t t-if="ordercomp == False">
@@ -151,8 +151,8 @@
   <t t-set="totpa" t-value="xml.get('Total')"/> 
   <!-- Articulos facturados (TOTALES) -->
   <t t-set="artfac" t-value="0"/>
-  <t t-foreach="record.fields_sales.order_line" t-as="rec">
-    <t t-set="artfac" t-value="artfac + rec.product_uom_qty"/>
+  <t t-foreach="record.invoice_line_ids" t-as="rec">
+    <t t-set="artfac" t-value="artfac + rec.quantity"/>
   </t>
   <!-- Impuesto IVA -->
   <t t-set="tagiva" t-value="0"/>
@@ -216,13 +216,19 @@
   <t t-set="regimenfi" t-value="record.partner_id.property_account_position_id.name"/>
   <t t-set="lugexpedco" t-value="xml.get('LugarExpedicion')"/>
   <t t-set="impstrasla" t-value="xml.Impuestos.get('TotalImpuestosTrasladados')"/>
-  <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+verco+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.fields_sales.order_line))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.product_uom_qty)+lin+t.product_uom.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str(round((t.price_subtotal/t.product_uom_qty),2))+lin+str(t.price_subtotal)+lin),   record.fields_sales.order_line))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
+  <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+verco+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.fields_sales.order_line))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str(round((t.price_subtotal/t.quantity),2))+lin+str(t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
   
   <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
   
-  <t t-set="tagfinal" t-value="taghcero+taghuno+taghdos+taghtres+taghcuatro+taghcinco+tagd+tags+tagco+tagse" />
+  <t t-set="tagfinal" t-value="taghcero+taghuno+taghdos+taghtres+taghcuatro+taghcinco+tagd+tags+tagco+tagse"/>
   <!--<t t-set="tagfinal" t-value="taghcero+taghuno+taghdos+taghtres+taghcuatro+taghcinco" />-->
-  <EDCINVOICE t-esc="tagfinal"/>
+  <t t-if="record.type == 'out_invoice'">
+  <lev1add:EDCINVOICE xmlns:lev1add="http://www.edcinvoice.com/lev1add" t-esc="tagfinal"/>
+  </t>
+  <t t-else="">
+    <EDCINVOICE/>
+  </t>
+  
   
 </template>
     <record id="add_walmart" model="ir.ui.view">
