@@ -2,6 +2,8 @@
 <odoo>
   <data noupdate="0">
 <template name="Walmart" id="add_walmart">
+   <t t-if="record.type == 'out_invoice'">
+
       <t t-set="xml" t-value="record.l10n_mx_edi_get_xml_etree()"/>
   <t t-set="sdato" t-value="'FaltaDato'"/>
   <t t-set="lin" t-value="'|'"/>
@@ -222,8 +224,7 @@
   
   <t t-set="tagfinal" t-value="taghcero+taghuno+taghdos+taghtres+taghcuatro+taghcinco+tagd+tags+tagco+tagse"/>
   <!--<t t-set="tagfinal" t-value="taghcero+taghuno+taghdos+taghtres+taghcuatro+taghcinco" />-->
-  <t t-if="record.type == 'out_invoice'">
-  <lev1add:EDCINVOICE xmlns:lev1add="http://www.edcinvoice.com/lev1add" t-esc="tagfinal"/>
+   <lev1add:EDCINVOICE xmlns:lev1add="http://www.edcinvoice.com/lev1add" t-esc="tagfinal"/>
   </t>
   <t t-else="">
     <EDCINVOICE/>
