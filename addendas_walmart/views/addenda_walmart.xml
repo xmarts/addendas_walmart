@@ -19,7 +19,7 @@
   <t t-set="folio" t-value="xml.get('Folio')"/>
   <t t-set="fecha" t-value="xml.get('Fecha')"/>
   <t t-set="formp" t-value="xml.get('FormaPago')"/>
-  <t t-set="condp" t-value="record.fields_sales.payment_term_id.name"/>
+  <t t-set="condp" t-value="record.payment_term_id.name"/>
   <t t-set="fundo" t-value="'O'"/>
   <t t-set="tipcomp" t-value="xml.get('TipoDeComprobante')"/>
   <t t-set="descuento" t-value="xml.get('Descuento')"/>
