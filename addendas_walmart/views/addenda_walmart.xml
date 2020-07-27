@@ -135,7 +135,7 @@
   
   <!-- Datos de la etiqueta D -->
   
-  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str(round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.invoice_line_tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str(x.price_subtotal)+lin+str(x.price_subtotal)+lin+str(x.price_tax)+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
+  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str('%.2f'% round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.invoice_line_tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_tax)+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
   <!-- Falta confirmacion de dato -->
   <t t-set="ordercomp" t-value="record.fields_sales.number_order"/>
   <t t-if="ordercomp == False">
@@ -164,7 +164,7 @@
         <t t-if="tg.name == 'IVA'">
           <t t-set="tagiva" t-value="tc.amount"/>
           <t t-if="tc.amount != 0">
-          <t t-set="impiva" t-value="round(float(subts) * float(0.16),2)"/>
+          <t t-set="impiva" t-value="'%.2f'% round(float(subts) * float(0.16),2)"/>
           <!-- <t t-set="tagiva" t-value="tc.amount * 0.16" />
            <t t-else="">
              <t t-set="tagiva" t-value="0.00" />         
