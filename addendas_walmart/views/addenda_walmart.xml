@@ -135,7 +135,7 @@
   
   <!-- Datos de la etiqueta D -->
   
-  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str('%.2f'% round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.invoice_line_tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_tax)+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
+  <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str('%.2f'% round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.invoice_line_tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% ((x.price_total/1.16)*0.16))+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
   <!-- Falta confirmacion de dato -->
   <t t-set="ordercomp" t-value="record.fields_sales.number_order"/>
   <t t-if="ordercomp == False">
@@ -144,8 +144,8 @@
   <t t-set="tagd" t-value="tagdatad+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin"/>
   
   <!-- Datos de la etiqueta S -->
-  <t t-set="impsub" t-value="float(record.amount_untaxed)"/>
-  <t t-set="imptot" t-value="float(record.amount_total)"/>
+  <t t-set="impsub" t-value="'%.2f'% float(record.amount_untaxed)"/>
+  <t t-set="imptot" t-value="'%.2f'% float(record.amount_total)"/>
   <t t-set="subts" t-value="xml.get('SubTotal')"/>
   <t t-set="descs" t-value="'0'"/>
   <t t-set="impiva" t-value="0"/>
@@ -164,7 +164,7 @@
         <t t-if="tg.name == 'IVA'">
           <t t-set="tagiva" t-value="tc.amount"/>
           <t t-if="tc.amount != 0">
-          <t t-set="impiva" t-value="'%.2f'% round(float(subts) * float(0.16),2)"/>
+          <t t-set="impiva" t-value="'%.2f'% ((tiv.price_total/1.16)*0.16)"/>
           <!-- <t t-set="tagiva" t-value="tc.amount * 0.16" />
            <t t-else="">
              <t t-set="tagiva" t-value="0.00" />         
@@ -218,7 +218,7 @@
   <t t-set="regimenfi" t-value="record.partner_id.property_account_position_id.name"/>
   <t t-set="lugexpedco" t-value="xml.get('LugarExpedicion')"/>
   <t t-set="impstrasla" t-value="xml.Impuestos.get('TotalImpuestosTrasladados')"/>
-  <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+verco+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str(round((t.price_subtotal/t.quantity),2))+lin+str(t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
+  <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+verco+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str('%.2f'% round((t.price_subtotal/t.quantity),2))+lin+str('%.2f'% t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
   
   <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
   
@@ -229,6 +229,7 @@
   <t t-else="">
     <EDCINVOICE/>
   </t>
+  
   
   
 </template>
