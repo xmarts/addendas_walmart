@@ -164,7 +164,7 @@
         <t t-if="tg.name == 'IVA'">
           <t t-set="tagiva" t-value="tc.amount"/>
           <t t-if="tc.amount != 0">
-          <t t-set="impiva" t-value="'%.2f'% ((tiv.price_total/1.16)*0.16)"/>
+          <t t-set="impiva" t-value="impiva + float('%.2f'% ((tiv.price_total/1.16)*0.16))"/>
           <!-- <t t-set="tagiva" t-value="tc.amount * 0.16" />
            <t t-else="">
              <t t-set="tagiva" t-value="0.00" />         
