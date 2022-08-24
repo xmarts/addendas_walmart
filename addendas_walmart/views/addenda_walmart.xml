@@ -4,6 +4,11 @@
         <template name="Walmart" id="add_walmart">
             <t t-if="record.move_type == 'out_invoice'">
                 <t t-set="xml" t-value="record._get_values_addenda()"/>
+                <t t-set="format_float" t-value="xml.get('format_float')"/>
+                <t t-set="format_string" t-value="xml.get('format_string')"/>
+                <t t-set="tax_objected" t-value="xml.get('tax_objected')"/>
+                <t t-set="currency_precision" t-value="xml.get('currency_precision')"/>
+
                 <t t-set="sdato" t-value="'FaltaDato'"/>
                 <t t-set="lin" t-value="'|'"/>
 
@@ -21,7 +26,7 @@
                 <t t-set="condp" t-value="record.invoice_payment_term_id.name"/>
                 <t t-set="fundo" t-value="'O'"/>
                 <t t-set="tipcomp" t-value="xml.get('document_type')"/>
-                <t t-set="descuento" t-value="xml.get('total_price_discount')"/>
+                <t t-set="descuento" t-value="format_float(xml.get('total_price_discount'), currency_precision) if not record.currency_id.is_zero(xml.get('total_price_discount')) else None"/>
 
                 <t t-if="descuento == None">
                     <t t-set="descuento" t-value="''"/>
@@ -143,10 +148,10 @@
                 <!-- Datos de la etiqueta S -->
                 <t t-set="impsub" t-value="'%.2f'% float(record.amount_untaxed)"/>
                 <t t-set="imptot" t-value="'%.2f'% float(record.amount_total)"/>
-                <t t-set="subts" t-value="xml.get('total_price_subtotal_before_discount')"/>
+                <t t-set="subts" t-value="format_float(xml.get('total_price_subtotal_before_discount') if tax_objected == '02' else record.amount_total + xml.get('total_price_discount'), currency_precision)"/>
                 <t t-set="descs" t-value="'0'"/>
                 <t t-set="impiva" t-value="0"/>
-                <t t-set="impts" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], xml.get('currency_precision') if xml.get('tax_details_transferred')['tax_details'] else None"/>
+                <t t-set="impts" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision if xml.get('tax_details_transferred')['tax_details'] else None"/>
                 <t t-set="totpa" t-value="record.amount_total"/>
                 <!-- Articulos facturados (TOTALES) -->
                 <t t-set="artfac" t-value="0"/>
@@ -155,6 +160,7 @@
                 </t>
                 <!-- Impuesto IVA -->
                 <t t-set="tagiva" t-value="0"/>
+                <!-- FIXME: Descomentar esta parte, falta esta parte-->
                 <t t-foreach="record.invoice_line_ids" t-as="tiv">
                     <t t-foreach="tiv.tax_ids" t-as="tc">
                         <t t-foreach="tc.invoice_repartition_line_ids" t-as="irl">
@@ -216,7 +222,7 @@
                 <t t-set="countryco" t-value="record.company_id.country_id.name"/>
                 <t t-set="regimenfi" t-value="record.partner_id.property_account_position_id.name"/>
                 <t t-set="lugexpedco" t-value="xml.get('issued_address').zip or xml.get('supplier').zip"/>
-                <t t-set="impstrasla" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], xml.get('currency_precision') if xml.get('tax_details_transferred')['tax_details'] else None"/>
+                <t t-set="impstrasla" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision if xml.get('tax_details_transferred')['tax_details'] else None"/>
                 <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+str(verco)+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str('%.2f'% round((t.price_subtotal/t.quantity),2))+lin+str('%.2f'% t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
 
                 <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
