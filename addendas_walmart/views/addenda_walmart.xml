@@ -151,7 +151,7 @@
                 <t t-set="subts" t-value="format_float(xml.get('total_price_subtotal_before_discount') if tax_objected == '02' else record.amount_total + xml.get('total_price_discount'), currency_precision)"/>
                 <t t-set="descs" t-value="'0'"/>
                 <t t-set="impiva" t-value="0"/>
-                <t t-set="impts" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision if xml.get('tax_details_transferred')['tax_details'] else None"/>
+                <t t-set="impts" t-value="format_float(xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision) if xml.get('tax_details_transferred')['tax_details'] else None"/>
                 <t t-set="totpa" t-value="record.amount_total"/>
                 <!-- Articulos facturados (TOTALES) -->
                 <t t-set="artfac" t-value="0"/>
@@ -193,7 +193,7 @@
                 <t t-set="tags" t-value="'\r'+'\n'+'[S]'+lin+str(impsub)+lin+descs+lin+descs+lin+descs+lin+descs+lin+descs+lin+str(impiva)+lin+descs+lin+str(imptot)+lin+str(impsub)+lin+   str(artfac)+lin+str(tagiva)+lin+str(tagieps)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(cantpr)+lin+str(ivret)+lin+str(ivret)+lin+lin+lin+str(ivret)+lin+str(subts)+lin+str(subts)+lin+lin+lin"/>
 
                 <!-- Datos de la etiqueta CO -->
-                <t t-set="verco" t-value="3.3"/>
+                <t t-set="verco" t-value="4.0"/>
                 <t t-set="metpagco" t-value="xml.get('payment_policy')"/>
                 <t t-set="metpagformat" t-value="'MetodoPago'"/>
                 <t t-if="metpagco == PPD">
@@ -222,7 +222,7 @@
                 <t t-set="countryco" t-value="record.company_id.country_id.name"/>
                 <t t-set="regimenfi" t-value="record.partner_id.property_account_position_id.name"/>
                 <t t-set="lugexpedco" t-value="xml.get('issued_address').zip or xml.get('supplier').zip"/>
-                <t t-set="impstrasla" t-value="xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision if xml.get('tax_details_transferred')['tax_details'] else None"/>
+                <t t-set="impstrasla" t-value="format_float(xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision) if xml.get('tax_details_transferred')['tax_details'] else None"/>
                 <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+str(verco)+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str('%.2f'% round((t.price_subtotal/t.quantity),2))+lin+str('%.2f'% t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
 
                 <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
