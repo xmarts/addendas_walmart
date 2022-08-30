@@ -24,6 +24,9 @@
                 <t t-set="fecha" t-value="xml.get('cfdi_date')"/>
                 <t t-set="formp" t-value="xml.get('payment_method_code')"/>
                 <t t-set="condp" t-value="record.invoice_payment_term_id.name"/>
+                <t t-if="condp == False">
+                    <t t-set="condp" t-value="''"/>
+                </t>
                 <t t-set="fundo" t-value="'O'"/>
                 <t t-set="tipcomp" t-value="xml.get('document_type')"/>
                 <t t-set="descuento" t-value="format_float(xml.get('total_price_discount'), currency_precision) if not record.currency_id.is_zero(xml.get('total_price_discount')) else None"/>
@@ -160,21 +163,16 @@
                 </t>
                 <!-- Impuesto IVA -->
                 <t t-set="tagiva" t-value="0"/>
-                <!-- FIXME: Descomentar esta parte, falta esta parte-->
-                <t t-foreach="record.invoice_line_ids" t-as="tiv">
-                    <t t-foreach="tiv.tax_ids" t-as="tc">
-                        <t t-foreach="tc.invoice_repartition_line_ids" t-as="irl">
-                            <t t-foreach="irl.tag_ids" t-as="tg">
-                                <t t-if="tg.name == 'IVA'">
-                                    <t t-set="tagiva" t-value="tc.amount"/>
-                                    <t t-if="tc.amount != 0">
-                                        <t t-set="impiva" t-value="impiva + float('%.2f'% ((tiv.price_total/1.16)*0.16))"/>
-                                        <!-- <t t-set="tagiva" t-value="tc.amount * 0.16" />
-                                        <t t-else="">
-                                            <t t-set="tagiva" t-value="0.00" />
-                                        </t> -->
-                                    </t>
-                                </t>
+                <t t-foreach="record.fields_sales.order_line" t-as="tiv" >
+                    <t t-foreach="tiv.tax_id" t-as="tc">
+                        <t t-if="tc.description[0:3] == 'IVA'">
+                            <t t-set="tagiva" t-value="tc.amount"/>
+                            <t t-if="tc.amount != 0">
+                                <t t-set="impiva" t-value="impiva + float('%.2f'% ((tiv.price_total/1.16)*0.16))"/>
+                                <!-- <t t-set="tagiva" t-value="tc.amount * 0.16" />
+                                <t t-else="">
+                                    <t t-set="tagiva" t-value="0.00" />
+                                </t> -->
                             </t>
                         </t>
                     </t>
