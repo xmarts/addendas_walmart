@@ -81,9 +81,9 @@
                 <t t-set="rfcem" t-value="xml.get('supplier').vat"/>
                 <t t-set="glnem" t-value="record.company_id.field_gln_company"/>
                 <t t-set="street" t-value="record.company_id.street_name"/>
-                <t t-set="reference" t-value="record.company_id.street2"/>
+                <t t-set="reference" t-value="record.company_id.street2 if record.company_id.street2 else ''"/>
                 <t t-set="numext" t-value="record.company_id.street_number"/>
-                <t t-set="numint" t-value="record.company_id.street_number2"/>
+                <t t-set="numint" t-value="record.company_id.street_number2 if record.company_id.street_number2 else ''"/>
                 <t t-set="colony" t-value="record.company_id.l10n_mx_edi_colony"/>
                 <t t-set="locality" t-value="record.company_id.l10n_mx_edi_locality"/>
                 <t t-set="city" t-value="record.company_id.city"/>
@@ -163,7 +163,7 @@
                 </t>
                 <!-- Impuesto IVA -->
                 <t t-set="tagiva" t-value="0"/>
-                <t t-foreach="record.fields_sales.order_line" t-as="tiv" >
+                <t t-foreach="record.fields_sales.order_line" t-as="tiv">
                     <t t-foreach="tiv.tax_id" t-as="tc">
                         <t t-if="tc.description[0:3] == 'IVA'">
                             <t t-set="tagiva" t-value="tc.amount"/>
@@ -209,8 +209,8 @@
                 <t t-set="stateco" t-value="record.company_id.state_id.name"/>
                 <t t-set="zipco" t-value="record.company_id.zip"/>
                 <t t-set="accountno" t-value="record.partner_bank_id.acc_number"/>
-                <t t-if="accountno == False">
-                    <t t-set="accountno" t-value="record.partner_id.bank_ids.last_acc_number"/>
+                <t t-if="accountno == False"> 
+                  <t t-set="accountno" t-value="record.partner_id.bank_ids.last_acc_number"/>
                 </t>
                 <t t-set="rfcco" t-value="xml.get('supplier').vat"/>
                 <t t-set="namco" t-value="xml.get('supplier').name"/>
@@ -218,10 +218,82 @@
                 <t t-set="numextco" t-value="record.company_id.street_number"/>
                 <t t-set="colonyco" t-value="record.company_id.l10n_mx_edi_colony"/>
                 <t t-set="countryco" t-value="record.company_id.country_id.name"/>
-                <t t-set="regimenfi" t-value="record.partner_id.property_account_position_id.name"/>
+                <t t-set="regimenfi" t-value="record.partner_id.l10n_mx_edi_fiscal_regime"/>
+                <t t-set="regimenfitext" t-value="''"/>
+                <t t-if="regimenfi == '601'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('General de Ley Personas Morales')"/>
+                </t>
+                <t t-if="regimenfi == '603'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Personas Morales con Fines no Lucrativos')"/>
+                </t>
+                <t t-if="regimenfi == '605'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Sueldos y Salarios e Ingresos Asimilados a Salarios')"/>
+                </t>
+                <t t-if="regimenfi == '606'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Arrendamiento')"/>
+                </t>
+                <t t-if="regimenfi == '607'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Régimen de Enajenación o Adquisición de Bienes')"/>
+                </t>
+                <t t-if="regimenfi == '608'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Demás ingresos')"/>
+                </t>
+                <t t-if="regimenfi == '609'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Consolidación')"/>
+                </t>
+                <t t-if="regimenfi == '610'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Residentes en el Extranjero sin Establecimiento Permanente en México')"/>
+                </t>
+                <t t-if="regimenfi == '611'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Ingresos por Dividendos (socios y accionistas')"/>
+                </t>
+                <t t-if="regimenfi == '612'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Personas Físicas con Actividades Empresariales y Profesionales')"/>
+                </t>
+                <t t-if="regimenfi == '614'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Ingresos por intereses')"/>
+                </t>
+                <t t-if="regimenfi == '615'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Régimen de los ingresos por obtención de premios')"/>
+                </t>
+                <t t-if="regimenfi == '616'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Sin obligaciones fiscales')"/>
+                </t>
+                <t t-if="regimenfi == '620'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Sociedades Cooperativas de Producción que optan por diferir sus ingresos')"/>
+                </t>
+                <t t-if="regimenfi == '621'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Incorporación Fiscal')"/>
+                </t>
+                <t t-if="regimenfi == '622'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras')"/>
+                </t>
+                <t t-if="regimenfi == '623'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Opcional para Grupos de Sociedades')"/>
+                </t>
+                <t t-if="regimenfi == '624'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Coordinados')"/>
+                </t>
+                <t t-if="regimenfi == '625'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas')"/>
+                </t>
+                <t t-if="regimenfi == '626'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Régimen Simplificado de Confianza - RESICO')"/>
+                </t>
+                <t t-if="regimenfi == '628'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Hidrocarburos')"/>
+                </t>
+                <t t-if="regimenfi == '629'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales')"/>
+                </t>
+                <t t-if="regimenfi == '630'">
+                    <t t-set="regimenfitext" t-value="str(regimenfi) + str(' - ') + str('Enajenación de acciones en bolsa de valores')"/>
+                </t>
+                <t t-set="regimenfi2" t-value="dict(record.partner_id._fields['l10n_mx_edi_fiscal_regime'].selection)"/>
+                <t t-set="regimenficomp" t-value="dict(record.partner_id._fields['l10n_mx_edi_fiscal_regime'].selection)"/>
                 <t t-set="lugexpedco" t-value="xml.get('issued_address').zip or xml.get('supplier').zip"/>
                 <t t-set="impstrasla" t-value="format_float(xml.get('balance_multiplicator') * xml.get('tax_details_transferred')['tax_amount_currency'], currency_precision) if xml.get('tax_details_transferred')['tax_details'] else None"/>
-                <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+str(verco)+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfi)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str('%.2f'% round((t.price_subtotal/t.quantity),2))+lin+str('%.2f'% t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
+                <t t-set="tagco" t-value="'\r'+'\n'+'[CO]'+lin+lin+lin+str(verco)+lin+str(fetim)+lin+'Ingreso'+lin+'PPD-Pago en parcialidades o diferido'+lin+condpagco+lin+   str(impsub)+lin+'1'+lin+'MXP'+lin+str(totpa)+lin+str(formpagco)+lin+cityco+', '+stateco+lin+str(accountno)+lin+rfcco+lin+namco+   lin+''.join(map(lambda x: (streetco+lin+str(numextco)+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+   lin),record.invoice_line_ids))+streetco+lin+numextco+lin+colonyco+lin+cityco+lin+stateco+lin+countryco+lin+str(lugexpedco)+lin+str(regimenfitext)+lin+str(rfcrec)+lin+str(namrec)+lin+str(streetrec)+lin+str(numextrec)+lin+str(colonyrec)+lin+str(cityrec)+lin+str(staterec)+lin+str(countryrec)+lin+str(codpostrec)+lin+''.join(map(lambda t: (str(t.quantity)+lin+t.product_id.uom_id.name+lin+   str(t.product_id.barcode)+lin+t.product_id.name+lin+str('%.2f'% round((t.price_subtotal/t.quantity),2))+lin+str('%.2f'% t.price_subtotal)+lin),   record.invoice_line_ids))+'IVA'+lin+str(16.00)+lin+str(impstrasla)+lin+str(impstrasla)+lin+lin"/>
 
                 <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
 
