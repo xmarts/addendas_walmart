@@ -50,15 +50,15 @@
                 <t t-set="tsiva" t-value="'16'"/>
                 <t t-set="numti" t-value="record.partner_shipping_id.shipping_number_store"/>
                 <t t-set="moned" t-value="record.currency_id.name"/>
-                <t t-set="fenac" t-value="record.getDateFormatedAdd(record.fields_sales.date_of_deli)"/>
+                <t t-set="fenac" t-value="record.getDateFormatedAdd(record.sale_order_id.date_of_deli)"/>
                 <t t-if="fenac == False">
                     <t t-set="fenac" t-value="''"/>
                 </t>
-                <t t-set="numor" t-value="record.fields_sales.number_order"/>
+                <t t-set="numor" t-value="record.sale_order_id.number_order"/>
                 <t t-if="numor == False">
                     <t t-set="numor" t-value="''"/>
                 </t>
-                <t t-set="fechor" t-value="record.getDateFormatedAdd(record.fields_sales.date_of_order)"/>
+                <t t-set="fechor" t-value="record.getDateFormatedAdd(record.sale_order_id.date_of_order)"/>
                 <t t-if="fechor == False">
                     <t t-set="fechor" t-value="''"/>
                 </t>
@@ -80,7 +80,7 @@
                 <t t-set="namem" t-value="xml.get('supplier').name"/>
                 <t t-set="rfcem" t-value="xml.get('supplier').vat"/>
                 <t t-set="glnem" t-value="record.company_id.field_gln_company"/>
-                <t t-set="street" t-value="record.company_id.street_name"/>
+                <t t-set="street" t-value="record.company_id.street"/>
                 <t t-set="reference" t-value="record.company_id.street2 if record.company_id.street2 else ''"/>
                 <t t-set="numext" t-value="record.company_id.street_number"/>
                 <t t-set="numint" t-value="record.company_id.street_number2 if record.company_id.street_number2 else ''"/>
@@ -105,7 +105,7 @@
                 <t t-if="glnpricli == False">
                     <t t-set="glnpricli" t-value="''"/>
                 </t>
-                <t t-set="streetrec" t-value="record.partner_id.street_name"/>
+                <t t-set="streetrec" t-value="record.partner_id.street"/>
                 <t t-set="numextrec" t-value="record.partner_id.street_number"/>
                 <t t-set="numintrec" t-value="record.partner_id.street_number2"/>
                 <t t-set="colonyrec" t-value="record.partner_id.l10n_mx_edi_colony "/>
@@ -123,11 +123,11 @@
                 <!-- Datos de la etiqueta H5 -->
                 <t t-set="nament" t-value="record.partner_shipping_id.name"/>
                 <t t-set="rfcent" t-value="xml.get('customer_rfc')"/>
-                <t t-set="glndirenv" t-value="record.partner_shipping_id.shipping_gln"/>
+                <t t-set="glndirenv" t-value="record.partner_shipping_id.gln or ''"/>
                 <t t-if="glndirenv == False">
                     <t t-set="glndirenv" t-value="''"/>
                 </t>
-                <t t-set="streetent" t-value="record.partner_shipping_id.street_name"/>
+                <t t-set="streetent" t-value="record.partner_shipping_id.street"/>
                 <t t-set="numintent" t-value="record.partner_shipping_id.street_number"/>
                 <t t-set="numextent" t-value="record.partner_shipping_id.street_number2"/>
                 <t t-set="colonyent" t-value="record.partner_shipping_id.l10n_mx_edi_colony"/>
@@ -138,11 +138,10 @@
                 <t t-set="codpostent" t-value="record.partner_shipping_id.zip"/>
                 <t t-set="phoneent" t-value="record.partner_shipping_id.phone"/>
                 <t t-set="taghcinco" t-value="'\r'+'\n'+'[H5]'+lin+nament+lin+rfcent+lin+str(glndirenv)+lin+streetent+lin+str(numintent)+lin+str(numextent)+lin+   colonyent+lin+localityent+lin+''+lin+cityent+lin+stateent+lin+countryent+lin+codpostent+lin+lin+lin+lin+lin+   lin+lin+lin+lin+lin+lin+lin"/>
-
                 <!-- Datos de la etiqueta D -->
                 <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str('%.2f'% round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% ((x.price_total/1.16)*0.16))+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
                 <!-- Falta confirmacion de dato -->
-                <t t-set="ordercomp" t-value="record.fields_sales.number_order"/>
+                <t t-set="ordercomp" t-value="record.sale_order_id.number_order"/>
                 <t t-if="ordercomp == False">
                     <t t-set="ordercomp" t-value="''"/>
                 </t>
@@ -163,7 +162,7 @@
                 </t>
                 <!-- Impuesto IVA -->
                 <t t-set="tagiva" t-value="0"/>
-                <t t-foreach="record.fields_sales.order_line" t-as="tiv">
+                <t t-foreach="record.sale_order_id.order_line" t-as="tiv">
                     <t t-foreach="tiv.tax_id" t-as="tc">
                         <t t-if="tc.description[0:3] == 'IVA'">
                             <t t-set="tagiva" t-value="tc.amount"/>
@@ -178,7 +177,7 @@
                     </t>
                 </t>
                 <!-- Impuesto IEPS -->
-                <t t-set="tagieps" t-value="0"/>
+                <!-- <t t-set="tagieps" t-value="0"/>   str(artfac)+lin+str(tagiva)+lin+str(tagieps) -->
                 <!-- Valor 0 - 16 campos por confirmar valor -->
                 <t t-set="vc" t-value="0"/>
                 <!-- Cantidad de items -->
@@ -188,7 +187,7 @@
                 </t>
                 <!-- Iva retenido / Monto de Iva Retenido -->
                 <t t-set="ivret" t-value="0.00"/>
-                <t t-set="tags" t-value="'\r'+'\n'+'[S]'+lin+str(impsub)+lin+descs+lin+descs+lin+descs+lin+descs+lin+descs+lin+str(impiva)+lin+descs+lin+str(imptot)+lin+str(impsub)+lin+   str(artfac)+lin+str(tagiva)+lin+str(tagieps)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(cantpr)+lin+str(ivret)+lin+str(ivret)+lin+lin+lin+str(ivret)+lin+str(subts)+lin+str(subts)+lin+lin+lin"/>
+                <t t-set="tags" t-value="'\r'+'\n'+'[S]'+lin+str(impsub)+lin+descs+lin+descs+lin+descs+lin+descs+lin+descs+lin+str(impiva)+lin+descs+lin+str(imptot)+lin+str(impsub)+lin+   str(artfac)+lin+str(tagiva)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+str(vc)+lin+   str(cantpr)+lin+str(ivret)+lin+str(ivret)+lin+lin+lin+str(ivret)+lin+str(subts)+lin+str(subts)+lin+lin+lin"/>
 
                 <!-- Datos de la etiqueta CO -->
                 <t t-set="verco" t-value="4.0"/>
@@ -202,19 +201,20 @@
                 </t>
                 <t t-set="fetim" t-value="xml.get('cfdi_date')"/>
                 <t t-set="monedfac" t-value="xml.get('currency_name')"/>
-                <t t-set="condpagco" t-value="record.fields_sales.payment_term_id.name"/>
+                <t t-set="condpagco" t-value="record.sale_order_id.payment_term_id.name"/>
                 <!-- El valor tipo de cambio con valor 1 no existe en el xml que genera odoo -->
                 <t t-set="formpagco" t-value="xml.get('payment_method_code')"/>
                 <t t-set="cityco" t-value="record.company_id.city"/>
                 <t t-set="stateco" t-value="record.company_id.state_id.name"/>
                 <t t-set="zipco" t-value="record.company_id.zip"/>
-                <t t-set="accountno" t-value="record.partner_bank_id.acc_number"/>
+                <!-- <t t-set="accountno" t-value="record.partner_bank_id.acc_number"/>
                 <t t-if="accountno == False"> 
                   <t t-set="accountno" t-value="record.partner_id.bank_ids.last_acc_number"/>
-                </t>
-                <t t-set="rfcco" t-value="xml.get('supplier').vat"/>
-                <t t-set="namco" t-value="xml.get('supplier').name"/>
-                <t t-set="streetco" t-value="record.company_id.street_name"/>
+                </t> -->
+                <t t-set="accountno" t-value="record.partner_bank_id.acc_number or ''"/>
+                <t t-set="rfcco" t-value="xml.get('supplier').vat or ''"/>
+                <t t-set="namco" t-value="xml.get('supplier').name or ''"/>
+                <t t-set="streetco" t-value="record.company_id.street"/>
                 <t t-set="numextco" t-value="record.company_id.street_number"/>
                 <t t-set="colonyco" t-value="record.company_id.l10n_mx_edi_colony"/>
                 <t t-set="countryco" t-value="record.company_id.country_id.name"/>
