@@ -139,7 +139,9 @@
                 <t t-set="phoneent" t-value="record.partner_shipping_id.phone"/>
                 <t t-set="taghcinco" t-value="'\r'+'\n'+'[H5]'+lin+nament+lin+rfcent+lin+str(glndirenv)+lin+streetent+lin+str(numintent)+lin+str(numextent)+lin+   colonyent+lin+localityent+lin+''+lin+cityent+lin+stateent+lin+countryent+lin+codpostent+lin+lin+lin+lin+lin+   lin+lin+lin+lin+lin+lin+lin"/>
                 <!-- Datos de la etiqueta D -->
+
                 <t t-set="tagdatad" t-value="''.join(map(lambda x: ('\r'+'\n'+'[D]'+lin+x.product_id.barcode+lin+lin+   x.product_id.name+lin+lin+str(x.quantity)+lin+x.product_id.uom_id.name+lin+str(x.product_id.product_units)+lin+str('%.2f'% round((x.price_subtotal/x.quantity),2))+lin+'0'+   lin+'Mercadeo'+lin+'0'+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+str(x.price_subtotal)+lin+''.join(map(lambda t:    (str(int(t.amount))+lin+str(0)+lin), x.tax_ids))+str(int(x.quantity))+lin+lin+lin+lin+   str(x.product_id.default_code)+lin+str(x.product_id.barcode)+lin+lin+lin+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% x.price_subtotal)+lin+str('%.2f'% ((x.price_total/1.16)*0.16))+   lin+str(0)+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin+lin),record.invoice_line_ids))"/>
+                <t t-set="test" t-value="record.tagdatadprint(tagdatad)" />
                 <!-- Falta confirmacion de dato -->
                 <t t-set="ordercomp" t-value="record.sale_order_id.number_order"/>
                 <t t-if="ordercomp == False">
