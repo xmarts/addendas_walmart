@@ -297,33 +297,33 @@
 
                 <t t-set="tagse" t-value="'\r'+'\n'+' '+'[SE]'+lin+'\n'"/>
 
-                    <t t-set="NUMERODECONTRL" t-value="'\r'+'\n'+'UNB+UNOB:1+EDIID:ZZ+925485MX00:8+061231:1000+'+nocer+"/>
-                    <t t-set="FOLIODELAFACTURA" t-value="'\r'+'\n'+'UNH+1+INVOIC:D:01B:UN:AMC002BGM+380+'+lin+folio+'+9'+"/>
-                    <t t-set="FECHADELAFACTURA" t-value="'\r'+'\n'+fecha"/>
-                    <t t-set="ORDENDECOMPRA" t-value="'\r'+'\n'+'RFF+ON:'+numor+"/>
-                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'\r'+'\n'+fechor+"/>
-                    <t t-set="SERIEDELAFACTURA" t-value="'\r'+'\n'+'RFF+BT:'+serie+"/>
-                    <t t-set="NUMERODEAPROBACIONDEHACIENDA" t-value="'\r'+'\n'+'RFF+ATZ:'+nocer+"/>
-                    <t t-set="DATOSDELCOMPRADOR" t-value="'\r'+'\n'+'NAD+BY+7507003100001::9++'+"/>
-                    <t t-set="RFCDELCOMPRADOR" t-value="'\r'+'\n'+'RFF+GN:'+"/>
-                    <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'\r'+'\n'+'NAD+SU+++'+"/>
-                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'\r'+'\n'+'NAD+ST+7507003105136::9++'+"/>
-                    <t t-set="MONEDANACIONAL/TIPODECAMBIO" t-value="'\r'+'\n'+'CUX+2:'+"/>
-                    <t t-set="DIASDEVENCIMIENTO" t-value="'\r'+'\n'+'PAT+1++5:3:'+"/>
+                    <t t-set="NUMERODECONTRL" t-value="'\r'+'\n'+'UNB+UNOB:1+EDIID:ZZ+925485MX00:8+061231:1000+'+nocer+'\n'"/>
+                    <t t-set="FOLIODELAFACTURA" t-value="'\r'+'\n'+'UNH+1+INVOIC:D:01B:UN:AMC002BGM+380+'+lin+folio+'+9'+'\n'"/>
+                    <t t-set="FECHADELAFACTURA" t-value="'\r'+'\n'+fecha+'\n'"/>
+                    <t t-set="ORDENDECOMPRA" t-value="'\r'+'\n'+'RFF+ON:'+numor+'\n'"/>
+                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'\r'+'\n'+fechor+'\n'"/>
+                    <t t-set="SERIEDELAFACTURA" t-value="'\r'+'\n'+'RFF+BT:'+serie+'\n'"/>
+                    <t t-set="NUMERODEAPROBACIONDEHACIENDA" t-value="'\r'+'\n'+'RFF+ATZ:'+nocer+'\n'"/>
+                    <t t-set="DATOSDELCOMPRADOR" t-value="'\r'+'\n'+'NAD+BY+7507003100001::9++'+'\n'"/>
+                    <t t-set="RFCDELCOMPRADOR" t-value="'\r'+'\n'+'RFF+GN:'+'\n'"/>
+                    <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'\r'+'\n'+'NAD+SU+++'+'\n'"/>
+                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'\r'+'\n'+'NAD+ST+7507003105136::9++'+'\n'"/>
+                    <t t-set="MONEDANACIONAL/TIPODECAMBIO" t-value="'\r'+'\n'+'CUX+2:'+'\n'"/>
+                    <t t-set="DIASDEVENCIMIENTO" t-value="'\r'+'\n'+'PAT+1++5:3:'+'\n'"/>
                     <t t-set="UPC" t-value="'\r'+'\n'+'LIN+1++'+':SRV::9'+"/>
-                    <t t-set="DESCRIPCIONDELARTICULO" t-value="'\r'+'\n'+'IMD+F++:::'+"/>
-                    <t t-set="PIEZASFACTURADAS" t-value="'\r'+'\n'+'QTY+'+"/>
-                    <t t-set="SUBTOTALDELALINEA" t-value="'\r'+'\n'+'MOA+203:'+"/>
-                    <t t-set="PRECIOUNITARIO" t-value="'\r'+'\n'+'PRI+AAA:'+"/>
-                    <t t-set="PORCENTAJEDELIVA" t-value="'\r'+'\n'+'TAX+7+VAT+++:::'+"/>
-                    <t t-set="MONTODELIVA" t-value="'\r'+'\n'+'MOA+124:'+"/>
-                    <t t-set="NUMERODELINEAS" t-value="'\r'+'\n'+'CNT+2:'+"/>
-                    <t t-set="TOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+9:'+"/>
-                    <t t-set="SUBTOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+79:'+"/>
-                    <t t-set="PORCENTAJEDELIVA" t-value="'\r'+'\n'+'MOA+125:'+"/>
-                    <t t-set="MONTOTOTALDELIVA" t-value="'\r'+'\n'+'TAX+7+VAT+++:::'+"/>
-                    <t t-set="NUMERODESEGMENTOS" t-value="'\r'+'\n'+'UNT+'+"/>
-                    <t t-set="NUMERODECONTRL2" t-value="'\r'+'\n'+'UNZ+1+'+"/>
+                    <t t-set="DESCRIPCIONDELARTICULO" t-value="'\r'+'\n'+'IMD+F++:::'+'\n'"/>
+                    <t t-set="PIEZASFACTURADAS" t-value="'\r'+'\n'+'QTY+'+'\n'"/>
+                    <t t-set="SUBTOTALDELALINEA" t-value="'\r'+'\n'+'MOA+203:'+'\n'"/>
+                    <t t-set="PRECIOUNITARIO" t-value="'\r'+'\n'+'PRI+AAA:'+'\n'"/>
+                    <t t-set="PORCENTAJEDELIVA" t-value="'\r'+'\n'+'TAX+7+VAT+++:::'+'\n'"/>
+                    <t t-set="MONTODELIVA" t-value="'\r'+'\n'+'MOA+124:'+'\n'"/>
+                    <t t-set="NUMERODELINEAS" t-value="'\r'+'\n'+'CNT+2:'+'\n'"/>
+                    <t t-set="TOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+9:'+'\n'"/>
+                    <t t-set="SUBTOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+79:'+'\n'"/>
+                    <t t-set="PORCENTAJEDELIVA" t-value="'\r'+'\n'+'MOA+125:'+'\n'"/>
+                    <t t-set="MONTOTOTALDELIVA" t-value="'\r'+'\n'+'TAX+7+VAT+++:::'+'\n'"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'\r'+'\n'+'UNT+'+'\n'"/>
+                    <t t-set="NUMERODECONTRL2" t-value="'\r'+'\n'+'UNZ+1+'+'\n'"/>
 
                 <t t-set="tagfinal" t-value="NUMERODECONTRL+
                                                 FOLIODELAFACTURA+
