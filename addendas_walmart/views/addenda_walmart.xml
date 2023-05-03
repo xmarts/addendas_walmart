@@ -54,7 +54,7 @@
                 <!--t t-if="fenac == False">
                     <t t-set="fenac" t-value="''"/>
                 </t-->
-                <t t-set="numor" t-value="record.getDateFormatedAdd(record.sale_order_id.number_order)"/>
+                <t t-set="numor" t-value="record.sale_order_id.number_order"/>
                 <t t-if="numor == False">
                     <t t-set="numor" t-value="''"/>
                 </t>
