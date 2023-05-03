@@ -308,7 +308,7 @@
                     <t t-set="RFCDELCOMPRADOR" t-value="'\r'+'\n'+'RFF+GN:'+'\n'"/>
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'\r'+'\n'+'NADSU'+'\n'"/>
                     <t t-set="DATOSDELLUGARDEENTREGA" t-value="'\r'+'\n'+'NADST7507003105136::9++'+'\n'"/>
-                    <t t-set="MONEDANACIONAL/TIPODECAMBIO" t-value="0"/>
+                    <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="0"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="0"/>
                     <t t-set="UPC" t-value="0"/>
                     <t t-set="DESCRIPCIONDELARTICULO" t-value="0"/>
@@ -338,7 +338,7 @@
                                                 RFCDELPROVEEDOR+
                                                 NUMERODEPROVEEDORA9DIGITOS+
                                                 DATOSDELLUGARDEENTREGA+
-                                                MONEDANACIONAL/TIPODECAMBIO+
+                                                MONEDANACIONALTIPODECAMBIO+
                                                 DIASDEVENCIMIENTO+
                                                 UPC+
                                                 DESCRIPCIONDELARTICULO+
