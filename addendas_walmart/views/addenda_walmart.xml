@@ -310,7 +310,7 @@
                     <t t-set="DATOSDELLUGARDEENTREGA" t-value="'\r'+'\n'+'NADST7507003105136::9++'+streetrec"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'\r'+'\n'+'CUX+2:MXN:4'"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'\r'+'\n'+'PAT+1++5:3:'+metpagco"/>
-                    <t t-set="UPC" t-value="'\r'+'\n'+'LIN+1++'+':SRV::9'"/>
+                    <t t-set="UPC" t-value="'\r'+'\n'+'LIN+1++'+':SRV:'+''.join(map(lambda x: (x.product_id.barcode+':9'),record.invoice_line_ids))"/>
                     <t t-set="DESCRIPCIONDELARTICULO" t-value="'\r'+'\n'+'IMD+F++:::'"/>
                     <t t-set="PIEZASFACTURADAS" t-value="'\r'+'\n'+'QTY+47:'+str(cantpr)"/>
                     <t t-set="SUBTOTALDELALINEA" t-value="'\r'+'\n'+'MOA+203:'+str(subts)"/>
