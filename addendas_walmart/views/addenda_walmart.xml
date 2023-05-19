@@ -228,7 +228,7 @@
                     <t t-set="segundosxml" t-value="fechafactura.strftime('%S')"/>
                     <t t-set="comilla" t-value="'°'"/>
                     <t t-set="NUMERODECONTRL" t-value="yearxml+mesxml+diaxml+':'+horasxml+minutosxml+'+'+str(folio)"/>
-                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH'+'+'+str(folio)+'+'+INVOIC:D:01B:UN:AMC002'+comilla+serie+str(folio)+'+'+'9'+comilla+'DTM+137:'"/>
+                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH'+'+'+str(folio)+'+'+'INVOIC:D:01B:UN:AMC002'+comilla+str(folio)+'+'+'9'+comilla+'DTM+137:'"/>
                     <t t-set="FECHADELAFACTURA" t-value="fechafactura.strftime('%Y')+mesxml+diaxml+horasxml+minutosxml+segundosxml+':204'+comilla"/>
                     <t t-set="MONTOENTEXTO" t-value="'\r'+'\n'+'FTX+ZZZ+++'+totex+'+ES'"/>
                     <t t-set="ORDENDECOMPRA" t-value="'\r'+'\n'+comilla+'RFF+ON:'+numor+comilla"/>
