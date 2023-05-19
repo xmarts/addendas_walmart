@@ -88,6 +88,7 @@
                 <t t-set="namem" t-value="record.company_id.name"/>
                 <t t-set="rfcem" t-value="xml.get('supplier').vat"/>
                 <t t-set="street" t-value="record.company_id.street"/>
+                <t t-set="street2" t-value="record.company_id.street2"/>
                 <t t-set="numext" t-value="record.company_id.street_number"/>
                 <t t-set="numint" t-value="record.company_id.street_number2 if record.company_id.street_number2 else ''"/>
                 <t t-set="locality" t-value="record.company_id.l10n_mx_edi_locality"/>
@@ -114,10 +115,11 @@
                 <t t-set="namrec" t-value="xml.get('customer').commercial_partner_id.name"/>
                 <t t-set="rfcrec" t-value="xml.get('customer_rfc')"/>
                 <t t-set="glnpricli" t-value="record.partner_id.gln"/>
-                <t t-if="glnpricli == False">
-                    <t t-set="glnpricli" t-value="''"/>
-                </t>
+                <!--<t t-if="glnpricli == False">
+                    <t t-set="glnpricli" t-value=&apos;/>
+                </t>-->
                 <t t-set="streetrec" t-value="record.partner_id.street"/>
+                <t t-set="streetrec2" t-value="record.partner_id.street2"/>
                 <t t-set="numextrec" t-value="record.partner_id.street_number"/>
                 <t t-set="colonyrec" t-value="record.partner_id.l10n_mx_edi_colony "/>
                 <t t-set="localityrec" t-value="record.partner_id.l10n_mx_edi_locality"/>
@@ -226,43 +228,44 @@
                     <t t-set="horasxml" t-value="fechafactura.strftime('%H')"/>
                     <t t-set="minutosxml" t-value="fechafactura.strftime('%M')"/>
                     <t t-set="segundosxml" t-value="fechafactura.strftime('%S')"/>
-                    <t t-set="comilla" t-value="'°'"/>
+                    <t t-set="comilla" t-value="record.x_studio_comilla"/>
                     <t t-set="NUMERODECONTRL" t-value="yearxml+mesxml+diaxml+':'+horasxml+minutosxml+'+'+str(folio)"/>
-                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH'+'+'+str(folio)+'+'+'INVOIC:D:01B:UN:AMC002'+comilla+str(folio)+'+'+'9'+comilla+'DTM+137:'"/>
+                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH'+'+'+str(folio)+'+'+'INVOIC:D:01B:UN:AMC002'+comilla+'BGM+380+'+str(folio)+'+'+'9'+comilla+'DTM+137:'"/>
                     <t t-set="FECHADELAFACTURA" t-value="fechafactura.strftime('%Y')+mesxml+diaxml+horasxml+minutosxml+segundosxml+':204'+comilla"/>
-                    <t t-set="MONTOENTEXTO" t-value="'\r'+'\n'+'FTX+ZZZ+++'+totex+'+ES'"/>
-                    <t t-set="ORDENDECOMPRA" t-value="'\r'+'\n'+comilla+'RFF+ON:'+numor+comilla"/>
+                    <t t-set="MONTOENTEXTO" t-value="'FTX+ZZZ+++'+totex+'+ES'"/>
+                    <t t-set="ORDENDECOMPRA" t-value="comilla+'RFF+ON:'+numor+comilla"/>
                     <t t-set="fecha_addenda_order" t-value="record.sale_order_id.date_addenda_order"/>
-                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'\r'+'\n'+'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+'::102'"/>
-                    <t t-set="SERIEDELAFACTURA" t-value="'\r'+'\n'+comilla+'RFF+BT:A'+comilla+'NAD+BY+'+folio+'::9++'"/>
-                    <t t-set="DATOSDELCOMPRADOR" t-value="'\r'+'\n'+namrec+'+'+streetrec+'+'+numextrec+':'+cityrec+'+'+ localityrec+'+'+state+'+'+ codpostrec"/>
-                    <t t-set="RFCDELCOMPRADOR" t-value="'\r'+'\n'+comilla+'RFF+GN:'+rfcrec+'NAD+SU+++'"/>
-                    <t t-set="DATOSDELPROVEEDOR" t-value="'\r'+'\n'+namem+'+'+numext+' '+numint+':'+street+'+'+city+'+'+locality+'+'+state+'+'+codpost+comilla"/>
-                    <t t-set="RFCDELPROVEEDOR" t-value="'\r'+'\n'+'RFF+GN:'+rfcem"/>
-                    <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'\r'+'\n'+'RFF+IA:'+numpr"/>
-                    <!-- <t t-set="DATOSDELLUGARDEENTREGA" t-value="'\r'+'\n'+'NAD+ST+7507003105136::9++'"/> -->
+                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+'::102'"/>
+                    <t t-set="SERIEDELAFACTURA" t-value="comilla+'RFF+BT:A'+comilla+'NAD+BY+'+folio+'::9++'"/>
+                    <t t-set="DATOSDELCOMPRADOR" t-value="namrec+'+'+streetrec+':'+streetrec2+'+'+cityrec+'+'+state+'+'+ codpostrec"/>
+                    <t t-set="RFCDELCOMPRADOR" t-value="comilla+'RFF+GN:'+rfcrec+'NAD+SU+++'"/>
+                    <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+'+state+'+'+codpost+comilla"/>
+                    <t t-set="RFCDELPROVEEDOR" t-value="'RFF+GN:'+rfcem+comilla"/>
+                    <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
+                    <!-- <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+7507003105136::9++'"/> -->
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
-                    <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'\r'+'\n'+'CUX+2:'+moneda_cambio+':4'+comilla"/>
-                    <t t-set="DIASDEVENCIMIENTO" t-value="'\r'+'\n'+'PAT+1++5:3:'+condp+comilla"/>
-                    <t t-set="UPC" t-value="'\r'+'\n'+''.join(map(lambda x: ('LIN+1++'+x.product_id.barcode+':SRV::9 '),record.invoice_line_ids))"/>
-                    <t t-set="DESCRIPCIONDELARTICULO" t-value="'\r'+'\n'+''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla),record.invoice_line_ids))"/>
-                    <t t-set="PIEZASFACTURADAS" t-value="'\r'+'\n'+'QTY+47:'+str(cantpr)+':EA'"/>
-                    <t t-set="SUBTOTALDELALINEA" t-value="'\r'+'\n'+'MOA+203:'+str(subts)+comilla"/>
-                    <t t-set="PRECIOUNITARIO" t-value="'\r'+'\n'+''.join(map(lambda x: ('PRI+AAA:'+str(x.price_unit)+'::::AE'),record.invoice_line_ids))"/>
-                    <t t-set="PORCENTAJEDELIVA" t-value="'\r'+'\n'+''.join(map(lambda x: ('TAX+7+VAT+++:::'+str(x.tax_ids.amount)),record.invoice_line_ids))"/>
-                    <t t-set="MONTODELIVA" t-value="'\r'+'\n'+'MOA+124:'+str(impsub)+comilla+'UNS+S'+comilla"/>
-                    <t t-set="NUMERODELINEAS" t-value="'\r'+'\n'+'CNT+2:'+str(cantpr)"/>
-                    <t t-set="TOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+9:'+str(totpa)"/>
-                    <t t-set="SUBTOTALDELAFACTURA" t-value="'\r'+'\n'+'MOA+79:'+str(subts)"/>
-                    <t t-set="MONTOTOTALDELIVA" t-value="'\r'+'\n'+'TAX+7+VAT+++:::16'+'MOA+124:'+str(imptot)"/>
-                    <t t-set="NUMERODESEGMENTOS" t-value="'\r'+'\n'+'UNT+29+1'"/>
-                    <t t-set="NUMERODECONTRL2" t-value="'\r'+'\n'+'UNZ+1+'+folio"/>
+                    <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
+                    <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
+                    <t t-set="UPC" t-value="''.join(map(lambda x: ('LIN+1++'+x.product_id.barcode+':SRV::9 '+comilla),record.invoice_line_ids))"/>
+                    <t t-set="DESCRIPCIONDELARTICULO" t-value="''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla),record.invoice_line_ids))"/>
+                    <t t-set="PIEZASFACTURADAS" t-value="'QTY+47:'+str(cantpr)+':EA'+comilla"/>
+                    <t t-set="SUBTOTALDELALINEA" t-value="'MOA+203:'+str(subts)+comilla"/>
+                    <t t-set="PRECIOUNITARIO" t-value="''.join(map(lambda x: ('PRI+AAA:'+str(x.price_unit)+'::::AE'+comilla),record.invoice_line_ids))"/>
+                     <t t-set="PORCENTAJEDELIVA" t-value="''.join(map(lambda x: ('TAX+7+VAT+++:::'+str(x.tax_ids.amount)+'+B')+comilla,record.invoice_line_ids))"/>
+                    <t t-set="MONTODELIVA" t-value="'MOA+124:'+str(impsub)+comilla+'UNS+S'+comilla"/>
+                    <t t-set="NUMERODELINEAS" t-value="'CNT+2:'+str(cantpr)+comilla"/>
+                    <t t-set="TOTALDELAFACTURA" t-value="'MOA+9:'+str(totpa)+comilla"/>
+                    <t t-set="SUBTOTALDELAFACTURA" t-value="'MOA+79:'+str(subts)+comilla"/>
+                    <t t-set="IMPORTEANTESIMPUESTO" t-value="'MOA+125:'+str(subts)+comilla"/>
+                    <t t-set="MONTOTOTALDELIVA" t-value="'TAX+7+VAT+++:::0.00'+comilla+'MOA+124:'+str(imptot)+comilla"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+29+1'+comilla"/>
+                    <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
-                <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+MONTOTOTALDELIVA+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
-                <lev1add:EDCINVOICE xmlns:lev1add="http://www.edcinvoice.com/lev1add" t-esc="tagfinal"/>
+                <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+MONTOTOTALDELIVA+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
+                <Documento t-esc="tagfinal"/>
             </t>
             <t t-else="">
-                <EDCINVOICE/>
+                <Documento/>
             </t>
         </template>
         <record id="add_walmart" model="ir.ui.view">
