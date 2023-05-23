@@ -105,15 +105,13 @@
                 <t t-set="namede" t-value="record.partner_shipping_id.name"/>
                 <t t-set="streetent" t-value="record.partner_shipping_id.street"/>
                 <t t-set="streetent2" t-value="record.partner_shipping_id.street2"/>
-                <t t-set="localityent" t-value="record.partner_shipping_id.l10n_mx_edi_locality"/>
+                <!--<t t-set="localityent" t-value="record.partner_shipping_id.l10n_mx_edi_locality"/>-->
                 <t t-set="cityent" t-value="record.partner_shipping_id.city"/>
                 <t t-set="stateent" t-value="record.partner_shipping_id.state_id.name"/>
                 <t t-set="codpostent" t-value="record.partner_shipping_id.zip"/>
-                <!--
                 <t t-set="colonyent" t-value="record.partner_shipping_id.l10n_mx_edi_colony"/>
                 
-                
-                 -->
+             
                 
                 
                 <!-- Datos de la etiqueta H4 -->
@@ -215,7 +213,7 @@
                     <t t-set="segundosxml" t-value="fechafactura.strftime('%S')"/>
                     <t t-set="comilla" t-value="record.x_studio_comilla"/>
                     <t t-set="NUMERODECONTRL" t-value="yearxml+mesxml+diaxml+':'+horasxml+minutosxml+'+'+str(folio)"/>
-                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH+29+INVOIC:D:01B:UN:AMC002'+comilla+'BGM+380+'+str(folio)+'+9'+comilla+'DTM+137:'"/>
+                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH+31+INVOIC:D:01B:UN:AMC002'+comilla+'BGM+380+'+str(folio)+'+9'+comilla+'DTM+137:'"/>
                     <t t-set="FECHADELAFACTURA" t-value="fechafactura.strftime('%Y')+mesxml+diaxml+horasxml+minutosxml+segundosxml+':204'+comilla"/>
                     <t t-set="MONTOENTEXTO" t-value="'FTX+ZZZ+++'+totex+'+ES'"/>
                     <t t-set="ORDENDECOMPRA" t-value="comilla+'RFF+ON:'+numor+comilla"/>
@@ -227,7 +225,7 @@
                     <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+CDMX+'+codpost+comilla"/>
                     <t t-set="RFCDELPROVEEDOR" t-value="'RFF+GN:'+rfcem+comilla"/>
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
-                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+7507003105136::9++'+namede+'+'+streetent+':'+streetent2+'+'+localityent+cityent+'+'+stateent+'+'+codpostent+comilla"/>
+                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+7507003105136::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+cityent+'+'+stateent+'+'+codpostent+comilla"/>
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
@@ -243,7 +241,7 @@
                     <t t-set="SUBTOTALDELAFACTURA" t-value="'MOA+79:'+str(subts)+comilla"/>
                     <t t-set="IMPORTEANTESIMPUESTO" t-value="'MOA+125:'+str(subts)+comilla"/>
                     <t t-set="MONTOTOTALDELIVA" t-value="'TAX+7+VAT+++:::0.00'+comilla+'MOA+124:'+str(imptot)+comilla"/>
-                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+29+'+str(folio)+comilla"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+'+str(folio)+comilla"/>
                     <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
                 <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+DATOSDELLUGARDEENTREGA+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+MONTOTOTALDELIVA+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
