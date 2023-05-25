@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <template name="Walmart" t-name="addendas_walmart.add_walmart">
+       <template name="Walmart" t-name="addendas_walmart.add_walmart">
             <t t-if="record.move_type == 'out_invoice'">
                 <t t-set="xml" t-value="record._get_values_addenda()"/>
                 <t t-set="format_float" t-value="xml.get('format_float')"/>
@@ -15,7 +15,6 @@
                 <!-- Datos de la etiqueta H0 -->
                 <t t-set="rfcrec" t-value="xml.get('customer_rfc')"/>
                 <t t-set="nocer" t-value="xml.get('certificate_number')"/>
-                <t t-set="numlev" t-value="record.company_id.field_num_levicom"/>
 
                 <!-- Datos de la etiqueta H1 -->
                 <t t-set="serie" t-value="xml.get('serie_number')"/>
@@ -110,6 +109,7 @@
                 <t t-set="stateent" t-value="record.partner_shipping_id.state_id.name"/>
                 <t t-set="codpostent" t-value="record.partner_shipping_id.zip"/>
                 <t t-set="colonyent" t-value="record.partner_shipping_id.l10n_mx_edi_colony"/>
+                <t t-set="glnent" t-value="record.partner_shipping_id.gln"/>
                 
              
                 
@@ -225,7 +225,7 @@
                     <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+CDMX+'+codpost+comilla"/>
                     <t t-set="RFCDELPROVEEDOR" t-value="'RFF+GN:'+rfcem+comilla"/>
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
-                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+7507003105136::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+cityent+'+'+stateent+'+'+codpostent+comilla"/>
+                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+cityent+'+'+stateent+'+'+codpostent+comilla"/>
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
