@@ -229,7 +229,7 @@
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
-                    <t t-set="UPC" t-value="''.join(map(lambda x: ('LIN+1++'+x.product_id.barcode+':SRV::9 '+comilla),record.invoice_line_ids))"/>
+                    <t t-set="UPC" t-value="''.join(map(lambda x: ('LIN+1++'+x.product_id.x_studio_char_field_0gSAl+':SRV::9 '+comilla),record.invoice_line_ids))"/>
                     <t t-set="DESCRIPCIONDELARTICULO" t-value="''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla),record.invoice_line_ids))"/>
                     <t t-set="PIEZASFACTURADAS" t-value="'QTY+47:'+str(cantpr)+':EA'+comilla"/>
                     <t t-set="SUBTOTALDELALINEA" t-value="'MOA+203:'+str(subts)+comilla"/>
