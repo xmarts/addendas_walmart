@@ -75,13 +75,8 @@
                 <t t-set="fenacc" t-value="'TEXTO DE PRUEBA'"/>
                 <t t-set="totex" t-value="record.amount_to_text"/>
                 <t t-set="ilcfd" t-value="'D00'"/>
-                <t t-set="namcomercial" t-value="0"/>
-                <t t-foreach="record.partner_id.child_ids" t-as="child">
-                    <t t-if="child.type == 'contact'">
-                        <t t-set="namcomercial" t-value="child.name"/>
-                    </t>
-                </t>
-                <t t-set="numcertif" t-value="record.company_id.field_num_certificate"/>
+             
+               <!-- <t t-set="numcertif" t-value="record.company_id.field_num_certificate"/>-->
 
                 <!-- Datos de la etiqueta H2 -->
                 <t t-set="namem" t-value="record.company_id.name"/>
@@ -95,9 +90,9 @@
                 <t t-set="country" t-value="record.company_id.country_id.name"/>
                 <t t-set="codpost" t-value="record.company_id.zip"/>
                 <t t-set="regfiscal" t-value="record.company_id.l10n_mx_edi_fiscal_regime"/>
-                <t t-set="phoneem" t-value="record.company_id.phone"/>
+                <!--<t t-set="phoneem" t-value="record.company_id.phone"/>
                 <t t-set="emailem" t-value="record.company_id.email"/>
-                <t t-set="numprovc" t-value="record.company_id.partner_id.shipping_number_provider"/>
+                <t t-set="numprovc" t-value="record.company_id.partner_id.shipping_number_provider"/>-->
                
 
                 <t t-set="namede" t-value="record.partner_shipping_id.name"/>
@@ -125,10 +120,7 @@
                 <t t-set="staterec" t-value="record.partner_id.l10n_mx_edi_colony_code"/>
                 <t t-set="countryrec" t-value="record.partner_id.country_id.name"/>
                 <t t-set="codpostrec" t-value="record.partner_id.zip"/>
-                <t t-set="emailrec" t-value="record.partner_id.email"/>
-                <t t-if="emailrec == False">
-                    <t t-set="emailrec" t-value="''"/>
-                </t>
+               
                
                
                 <!-- Falta confirmacion de dato -->
