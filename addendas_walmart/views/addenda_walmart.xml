@@ -90,8 +90,7 @@
                 <t t-set="street2" t-value="record.company_id.street2"/>
                 <t t-set="numext" t-value="record.company_id.street_number"/>
                 <t t-set="numint" t-value="record.company_id.street_number2 if record.company_id.street_number2 else ''"/>
-                <t t-set="locality" t-value="record.company_id.l10n_mx_edi_locality"/>
-                <t t-set="city" t-value="record.company_id.city"/>
+                <t t-set="city" t-value="record.company_id. city"/>
                 <t t-set="state" t-value="record.company_id.state_id.name"/>
                 <t t-set="country" t-value="record.company_id.country_id.name"/>
                 <t t-set="codpost" t-value="record.company_id.zip"/>
@@ -104,9 +103,9 @@
                 <t t-set="namede" t-value="record.partner_shipping_id.name"/>
                 <t t-set="streetent" t-value="record.partner_shipping_id.street"/>
                 <t t-set="streetent2" t-value="record.partner_shipping_id.street2"/>
-                <!--<t t-set="localityent" t-value="record.partner_shipping_id.l10n_mx_edi_locality"/>-->
-                <t t-set="cityent" t-value="record.partner_shipping_id.city"/>
-                <t t-set="stateent" t-value="record.partner_shipping_id.state_id.name"/>
+                <t t-set="cityent" t-value="record.partner_shipping_id.l10n_mx_edi_colony"/>
+                <t t-set="stateent" t-value="record.partner_shipping_id.l10n_mx_edi_colony_code"/>
+                <t t-set="pais" t-value="record.partner_shipping_id.country_id.name"/>
                 <t t-set="codpostent" t-value="record.partner_shipping_id.zip"/>
                 <t t-set="colonyent" t-value="record.partner_shipping_id.l10n_mx_edi_colony"/>
                 <t t-set="glnent" t-value="record.partner_shipping_id.gln"/>
@@ -122,9 +121,8 @@
                 <t t-set="streetrec2" t-value="record.partner_id.street2"/>
                 <t t-set="numextrec" t-value="record.partner_id.street_number"/>
                 <t t-set="colonyrec" t-value="record.partner_id.l10n_mx_edi_colony "/>
-                <t t-set="localityrec" t-value="record.partner_id.l10n_mx_edi_locality"/>
-                <t t-set="cityrec" t-value="record.partner_id.city"/>
-                <t t-set="staterec" t-value="record.partner_id.state_id.name"/>
+                <t t-set="cityrec" t-value="record.partner_id.l10n_mx_edi_colony"/>
+                <t t-set="staterec" t-value="record.partner_id.l10n_mx_edi_colony_code"/>
                 <t t-set="countryrec" t-value="record.partner_id.country_id.name"/>
                 <t t-set="codpostrec" t-value="record.partner_id.zip"/>
                 <t t-set="emailrec" t-value="record.partner_id.email"/>
@@ -220,12 +218,12 @@
                     <t t-set="fecha_addenda_order" t-value="record.sale_order_id.date_addenda_order"/>
                     <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+'::102'"/>
                     <t t-set="SERIEDELAFACTURA" t-value="comilla+'RFF+BT:A'+comilla+'NAD+BY+'+glnpricli+'::9++'"/>
-                    <t t-set="DATOSDELCOMPRADOR" t-value="namrec+'+'+streetrec+':'+streetrec2+'+'+cityrec+'+CDMX+'+ codpostrec"/>
+                    <t t-set="DATOSDELCOMPRADOR" t-value="namrec+'+'+streetrec+':'+streetrec2+'+'+cityrec+'+'+staterec+'+'+ codpostrec"/>
                     <t t-set="RFCDELCOMPRADOR" t-value="comilla+'RFF+GN:'+rfcrec+comilla+'NAD+SU+++'"/>
-                    <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+CDMX+'+codpost+comilla"/>
+                    <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+'+state+'+'+codpost+comilla"/>
                     <t t-set="RFCDELPROVEEDOR" t-value="'RFF+GN:'+rfcem+comilla"/>
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
-                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+cityent+'+'+stateent+'+'+codpostent+comilla"/>
+                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+stateent+'+'+pais+'+'+codpostent+comilla"/>
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
