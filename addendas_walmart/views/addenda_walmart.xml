@@ -6,9 +6,9 @@
           <t t-set="sdato" t-value="'FaltaDato'"/>
           <!-- Datos del xml generado por el SAT -->
           <t t-set="xml" t-value="record._get_values_addenda()"/>
-          <t t-set="number_order" t-value="record.sale_order_id.number_order"/>
-          <t t-set="date_order" t-value="record.sale_order_id.date_order.year"/>
-          <t t-set="number_cedis" t-value="record.partner_id.shipping_number_cedis"/>
+          <t t-set="number_order" t-value="record.number_order"/>
+          <t t-set="date_order" t-value="record.date_addenda_order.year"/>
+          <t t-set="number_cedis" t-value="record.shipping_number_cedis"/>
           <t t-set="number_provider" t-value="record.partner_id.shipping_number_provider"/>
       
           <AddendaWalmart t-att-Anio="date_order" t-att-numeroProveedor="number_provider" t-att-ordenCompra="number_order" t-att-unidadCEDIS="number_cedis"/>
