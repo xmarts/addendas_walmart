@@ -11,7 +11,7 @@
           <t t-set="number_cedis" t-value="record.shipping_number_cedis"/>
           <t t-set="number_provider" t-value="record.partner_id.shipping_number_provider"/>
       
-          <AddendaWalmart t-att-Anio="date_order" t-att-numeroProveedor="number_provider" t-att-ordenCompra="number_order" t-att-unidadCEDIS="number_cedis"/>
+          <AddendaWalmart t-att-Anio="date_order" t-att-numeroProveedor="number_provider" t-att-ordenCompra="number_order" t-att-unidadCEDIS="number_cedis" pais="México"/>
         </template>
         <record id="add_walmart" model="ir.ui.view">
             <field name="l10n_mx_edi_addenda_flag">True</field>
