@@ -9,9 +9,10 @@
     'website': "http://www.xmarts.com",
     'category': 'Uncategorized',
     'version': '15.0.1.0.0',
-    'depends': ['base', 'l10n_mx_edi', 'fields_functions_adendas', 'l10n_mx_edi_40'],
+    'depends': ['base', 'l10n_mx_edi', 'fields_functions_adendas', 'l10n_mx_edi_extended_40'],
     'data': [
         # 'security/ir.model.access.csv',
+        'data/inherit_cfdi.xml',
         'views/addenda_walmart.xml',
     ],
 }
