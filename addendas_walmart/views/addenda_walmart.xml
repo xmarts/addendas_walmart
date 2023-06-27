@@ -9,8 +9,16 @@
             <t t-set="date_order" t-value="record.date_addenda_order.year" />
             <t t-set="number_cedis" t-value="record.shipping_number_cedis" />
             <t t-set="number_provider" t-value="record.partner_id.shipping_number_provider" />
-            <AddendaWalmart xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pegasotecnologia.com/secfd/Schemas/Receptor/Walmart http://www.pegasotecnologia.com/secfd/Schemas/Receptor/Walmart" t-att-Anio="date_order" t-att-numeroProveedor="number_provider"
-                t-att-ordenCompra="number_order" t-att-unidadCEDIS="number_cedis" pais="México" />
+            <WM:AddendaWalmart
+                xmlns:WM="http://www.pegasotecnologia.com/secfd/Schemas/Receptor/Walmart" 
+                xsi:schemaLocation="http://www.pegasotecnologia.com/secfd/Schemas/Receptor/Walmart http://www.pegasotecnologia.com/secfd/Schemas/Receptor/AddendaWalmart.xsd" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                t-att-Anio="date_order" 
+                t-att-numeroProveedor="number_provider" 
+                t-att-ordenCompra="number_order" 
+                t-att-unidadCEDIS="number_cedis" 
+                pais="México"
+            />
         </template>
         <record id="add_walmart" model="ir.ui.view">
             <field name="l10n_mx_edi_addenda_flag">True</field>
