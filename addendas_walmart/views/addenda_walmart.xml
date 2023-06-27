@@ -234,7 +234,7 @@
                     <t t-set="MONTOENTEXTO" t-value="'FTX+ZZZ+++'+totex+'+ES'"/>
                     <t t-set="ORDENDECOMPRA" t-value="comilla+'RFF+ON:'+numor+comilla"/>
                     <t t-set="fecha_addenda_order" t-value="record.sale_order_id.date_addenda_order"/>
-                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+':102'"/>
+                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+'102'"/>
                     <t t-set="SERIEDELAFACTURA" t-value="comilla+'RFF+BT:A'+comilla+'NAD+BY+'+glnpricli+'::9++'"/>
                     <t t-set="DATOSDELCOMPRADOR" t-value="namrec+'+'+streetrec+':'+streetrec2+'+'+cityrec+'+'+staterec+'+'+ codpostrec"/>
                     <t t-set="RFCDELCOMPRADOR" t-value="comilla+'RFF+GN:'+rfcrec+comilla+'NAD+SU+++'"/>
@@ -246,7 +246,7 @@
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
                     <t t-set="UPC" t-value="''.join(map(lambda x: ('LIN+1++'+x.product_id.x_studio_char_field_0gSAl+':SRV::9 '+comilla),record.invoice_line_ids))"/>
-                    <t t-set="DESCRIPCIONDELARTICULO" t-value="''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla+'QTY+47:'+str(x.quantity)+':EA'+comilla+'MOA+203:'+str(x.price_subtotal)+comilla+'PRI+AAA:'+str(x.price_unit)+'::::AE'+comilla+'TAX+7+VAT+++:::'+str(x.tax_ids.amount)+'+B'+comilla+'MOA+124:'+str(format_float(((x.tax_ids.amount/100)*float(impsub)),2))+comilla),record.invoice_line_ids))"/>
+                    <t t-set="DESCRIPCIONDELARTICULO" t-value="''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla+'QTY+47:'+str(x.quantity)+':EA'+comilla+'MOA+203:'+str(x.price_subtotal)+comilla+'PRI+AAA:'+str(x.price_unit)+'::::EA'+comilla+'TAX+7+VAT+++:::'+str(x.tax_ids.amount)+'+B'+comilla+'MOA+124:'+str(format_float(((x.tax_ids.amount/100)*float(impsub)),2))+comilla),record.invoice_line_ids))"/>
                     <t t-set="PIEZASFACTURADAS" t-value="''"/>
                     <t t-set="SUBTOTALDELALINEA" t-value="''"/>
                     <t t-set="PRECIOUNITARIO" t-value="''"/>
@@ -279,7 +279,7 @@
                     </t>
                       
           
-                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+'+str(folio)+comilla"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+31'+comilla"/>
                     <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
                 <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+DATOSDELLUGARDEENTREGA+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+str(MONTOTOTALDELIVA0)+str(MONTOTOTALDELIVA8)+str(MONTOTOTALDELIVA16)+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
