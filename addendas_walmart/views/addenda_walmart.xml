@@ -243,7 +243,7 @@
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
                     <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+stateent+'+'+pais+'+'+codpostent+comilla"/>
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
-                    <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+moneda_cambio+':4'+comilla"/>
+                    <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+str(moneda_cambio)+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
                     <t t-set="UPC" t-value="''.join(map(lambda x: ('LIN+1++'+x.product_id.x_studio_char_field_0gSAl+':SRV::9 '+comilla),record.invoice_line_ids))"/>
                     <t t-set="DESCRIPCIONDELARTICULO" t-value="''.join(map(lambda x: ('IMD+F++:::'+x.product_id.name+'::ES'+comilla+'QTY+47:'+str(x.quantity)+':EA'+comilla+'MOA+203:'+str(x.price_subtotal)+comilla+'PRI+AAA:'+str(x.price_unit)+'::::EA'+comilla+'TAX+7+VAT+++:::'+str(x.tax_ids.amount)+'+B'+comilla+'MOA+124:'+str(format_float(((x.tax_ids.amount/100)*float(impsub)),2))+comilla),record.invoice_line_ids))"/>
