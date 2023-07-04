@@ -241,7 +241,7 @@
                     <t t-set="DATOSDELPROVEEDOR" t-value="namem+'+'+numext+' '+numint+':'+street2+'+'+city+'+'+state+'+'+codpost+comilla"/>
                     <t t-set="RFCDELPROVEEDOR" t-value="'RFF+GN:'+rfcem+comilla"/>
                     <t t-set="NUMERODEPROVEEDORA9DIGITOS" t-value="'RFF+IA:'+numpr+comilla"/>
-                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+streetent2+'+'+colonyent+stateent+'+'+pais+'+'+codpostent+comilla"/>
+                    <t t-set="DATOSDELLUGARDEENTREGA" t-value="'NAD+ST+'+glnent+'::9++'+namede+'+'+streetent+':'+colonyent+'+'+stateent+'+'+pais+'+'+codpostent+comilla"/>
                     <t t-set="moneda_cambio" t-value="record.currency_id.name"/>
                     <t t-set="MONEDANACIONALTIPODECAMBIO" t-value="'CUX+2:'+str(moneda_cambio)+':4'+comilla"/>
                     <t t-set="DIASDEVENCIMIENTO" t-value="'PAT+1++5:3:'+condp+comilla"/>
@@ -288,6 +288,7 @@
             <t t-else="">
                 <Documento/>
             </t>
+      
         </template>
         <record id="add_walmart" model="ir.ui.view">
             <field name="l10n_mx_edi_addenda_flag">True</field>
