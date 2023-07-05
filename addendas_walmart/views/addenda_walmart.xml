@@ -2,7 +2,6 @@
 <odoo>
     <data noupdate="0">
        <template name="Walmart" t-name="addendas_walmart.add_walmart">
-          <t name="Walmart" t-name="addendas_walmart.add_walmart">
             <t t-if="record.move_type == 'out_invoice'">
                 <t t-set="xml" t-value="record._get_values_addenda()"/>
                 <t t-set="format_float" t-value="xml.get('format_float')"/>
@@ -289,8 +288,6 @@
             <t t-else="">
                 <Documento/>
             </t>
-        </t>
-      
         </template>
         <record id="add_walmart" model="ir.ui.view">
             <field name="l10n_mx_edi_addenda_flag">True</field>
