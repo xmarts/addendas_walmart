@@ -2,6 +2,7 @@
 <odoo>
     <data noupdate="0">
        <template name="Walmart" t-name="addendas_walmart.add_walmart">
+          <t name="Walmart" t-name="addendas_walmart.add_walmart">
             <t t-if="record.move_type == 'out_invoice'">
                 <t t-set="xml" t-value="record._get_values_addenda()"/>
                 <t t-set="format_float" t-value="xml.get('format_float')"/>
@@ -229,7 +230,7 @@
                     <t t-set="segundosxml" t-value="fechafactura.strftime('%S')"/>
                     <t t-set="comilla" t-value="record.x_studio_comilla"/>
                     <t t-set="NUMERODECONTRL" t-value="yearxml+mesxml+diaxml+':'+horasxml+minutosxml+'+'+str(folio)"/>
-                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH+31+INVOIC:D:01B:UN:AMC002'+comilla+'BGM+380+'+str(folio)+'+9'+comilla+'DTM+137:'"/>
+                    <t t-set="FOLIODELAFACTURA" t-value="comilla+'UNH+'+str(folio)+'+INVOIC:D:01B:UN:AMC002'+comilla+'BGM+380+'+str(folio)+'+9'+comilla+'DTM+137:'"/>
                     <t t-set="FECHADELAFACTURA" t-value="fechafactura.strftime('%Y')+mesxml+diaxml+horasxml+minutosxml+segundosxml+':204'+comilla"/>
                     <t t-set="MONTOENTEXTO" t-value="'FTX+ZZZ+++'+totex+'+ES'"/>
                     <t t-set="ORDENDECOMPRA" t-value="comilla+'RFF+ON:'+numor+comilla"/>
@@ -258,28 +259,28 @@
                     <t t-set="IMPORTEANTESIMPUESTO" t-value="'MOA+125:'+str(subts)+comilla"/>
                     
                     <t t-if="iva0 != 0">
-                      <t t-set="MONTOTOTALDELIVA0" t-value="'TAX+7+VAT+++:::0.00'+comilla+'MOA+124:0.00'+comilla"/>
+                      <t t-set="MONTOTOTALDELIVA0" t-value="'TAX+7+VAT+++:::0.00+B'+comilla+'MOA+124:0.00'+comilla"/>
                     </t>
                     <t t-else="iva0 == 0">
                       <t t-set="MONTOTOTALDELIVA0" t-value="''"/>
                     </t>
                     
                     <t t-if="iva8 != 0">
-                      <t t-set="MONTOTOTALDELIVA8" t-value="'TAX+7+VAT+++:::8.00'+comilla+'MOA+124:'+str(iva8)+comilla"/>
+                      <t t-set="MONTOTOTALDELIVA8" t-value="'TAX+7+VAT+++:::8.00+B'+comilla+'MOA+124:'+str(iva8)+comilla"/>
                     </t>
                     <t t-else="iva8 == 0">
                       <t t-set="MONTOTOTALDELIVA8" t-value="''"/>
                     </t>
                     
                     <t t-if="iva16 != 0">
-                      <t t-set="MONTOTOTALDELIVA16" t-value="'TAX+7+VAT+++:::16.00'+comilla+'MOA+124:'+str(iva16)+comilla"/>
+                      <t t-set="MONTOTOTALDELIVA16" t-value="'TAX+7+VAT+++:::16.00+B'+comilla+'MOA+124:'+str(iva16)+comilla"/>
                     </t>
                     <t t-else="iva16 == 0">
                       <t t-set="MONTOTOTALDELIVA16" t-value="''"/>
                     </t>
                       
           
-                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+31'+comilla"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+'+folio+comilla"/>
                     <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
                 <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+DATOSDELLUGARDEENTREGA+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+str(MONTOTOTALDELIVA0)+str(MONTOTOTALDELIVA8)+str(MONTOTOTALDELIVA16)+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
@@ -288,6 +289,7 @@
             <t t-else="">
                 <Documento/>
             </t>
+        </t>
       
         </template>
         <record id="add_walmart" model="ir.ui.view">
