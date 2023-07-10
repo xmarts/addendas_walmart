@@ -168,7 +168,9 @@
                 <!-- Cantidad de items -->
                 <t t-set="cantpr" t-value="0"/>
                 <t t-foreach="record.invoice_line_ids" t-as="rec">
-                    <t t-set="cantpr" t-value="cantpr + 1"/>
+                    <t t-if="rec.display_type != 'line_note' ">
+                       <t t-set="cantpr" t-value="cantpr + 1"/>
+                    </t>
                 </t>
                 <!-- Iva retenido / Monto de Iva Retenido -->
                 <t t-set="ivret" t-value="0.00"/>
@@ -285,7 +287,7 @@
                     </t>
                       
           
-                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+31+'+folio+comilla"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+30+'+folio+comilla"/>
                     <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
                 <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+DATOSDELLUGARDEENTREGA+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+DESCRIPCIONDELARTICULO+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+str(MONTOTOTALDELIVA0)+str(MONTOTOTALDELIVA8)+str(MONTOTOTALDELIVA16)+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
