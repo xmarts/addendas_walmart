@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="0">
        <template name="Walmart" t-name="addendas_walmart.add_walmart">
-            <t t-if="record.move_type == 'out_invoice'">
+            <t t-if="record.move_type == 'out_invoice'">https://github.com/xmarts/addendas_walmart/edit/16.0-ranchosanluis/addendas_walmart/views/addenda_walmart.xml
                 <t t-set="xml" t-value="record._get_values_addenda()"/>
                 <t t-set="format_float" t-value="xml.get('format_float')"/>
                 <t t-set="format_string" t-value="xml.get('format_string')"/>
@@ -236,7 +236,7 @@
                     <t t-set="MONTOENTEXTO" t-value="'FTX+ZZZ+++'+totex+'+ES'"/>
                     <t t-set="ORDENDECOMPRA" t-value="comilla+'RFF+ON:'+numor+comilla"/>
                     <t t-set="fecha_addenda_order" t-value="record.sale_order_id.date_addenda_order"/>
-                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+'102'"/>
+                    <t t-set="FECHADELAORDENDECOMPRA" t-value="'DTM+171:'+fecha_addenda_order.strftime('%Y')+fecha_addenda_order.strftime('%m')+fecha_addenda_order.strftime('%d')+':102'"/>
                     <t t-set="SERIEDELAFACTURA" t-value="comilla+'RFF+BT:A'+comilla+'NAD+BY+'+glnpricli+'::9++'"/>
                     <t t-set="DATOSDELCOMPRADOR" t-value="namrec+'+'+streetrec+':'+streetrec2+'+'+cityrec+'+'+staterec+'+'+ codpostrec"/>
                     <t t-set="RFCDELCOMPRADOR" t-value="comilla+'RFF+GN:'+rfcrec+comilla+'NAD+SU+++'"/>
