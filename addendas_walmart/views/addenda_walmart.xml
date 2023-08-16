@@ -251,8 +251,10 @@
                     <t t-set="UPC" t-value="''"/>
                     <t t-set="upclist" t-value="record.invoice_line_ids.filtered(lambda x: x.display_type != 'line_note')"/>
                     <t t-set="upcnum" t-value="0"/>
+                    <t t-set="untnum" t-value="0"/>
                     <t t-foreach="upclist" t-as="rec">
                          <t t-set="upcnum" t-value="upcnum + 1"/>
+                         <t t-set="untnum" t-value="untnum + 7"/>
                          <t t-set="UPC" t-value="str(UPC) + 'LIN+' + str(upcnum) + '++' + rec.product_id.x_studio_char_field_0gSAl + ':SRV::9' + comilla + 'IMD+F++:::'+ str(rec.product_id.name) + '::ES' + comilla + 'QTY+47:' + str(rec.quantity) + ':EA' + comilla + 'MOA+203:' + str(rec.price_subtotal) + comilla + 'PRI+AAA:' + str(rec.price_unit) + '::::' + str(rec.get_type_product_uom(rec)) + '' + comilla + 'TAX+7+VAT+++:::' + str(rec.tax_ids.amount) + '+B' + comilla + 'MOA+124:' + str(format_float(((rec.tax_ids.amount/100)*float(impsub)),2)) + comilla"/> 
                     </t>
                     
@@ -292,7 +294,8 @@
                     </t>
                       
           
-                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+30+'+folio+comilla"/>
+                    <t t-set="untnumtotal" t-value="untnum + 23"/>
+                    <t t-set="NUMERODESEGMENTOS" t-value="'UNT+'+str(untnumtotal)+'+'+folio+comilla"/>
                     <t t-set="NUMERODECONTRL2" t-value="'UNZ+1+'+folio+comilla"/>
 
                 <t t-set="tagfinal" t-value="identificador+NUMERODECONTRL+FOLIODELAFACTURA+FECHADELAFACTURA+MONTOENTEXTO+ORDENDECOMPRA+FECHADELAORDENDECOMPRA+SERIEDELAFACTURA+DATOSDELCOMPRADOR+RFCDELCOMPRADOR+DATOSDELPROVEEDOR+RFCDELPROVEEDOR+NUMERODEPROVEEDORA9DIGITOS+DATOSDELLUGARDEENTREGA+MONEDANACIONALTIPODECAMBIO+DIASDEVENCIMIENTO+UPC+PORCENTAJEDELIVA+PIEZASFACTURADAS+SUBTOTALDELALINEA+PRECIOUNITARIO+PORCENTAJEDELIVA+MONTODELIVA+NUMERODELINEAS+TOTALDELAFACTURA+SUBTOTALDELAFACTURA+IMPORTEANTESIMPUESTO+str(MONTOTOTALDELIVA0)+str(MONTOTOTALDELIVA8)+str(MONTOTOTALDELIVA16)+NUMERODESEGMENTOS+NUMERODECONTRL2"/>
