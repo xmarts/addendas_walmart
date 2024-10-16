@@ -37,6 +37,9 @@
                 <t t-if="condp == 16">
                     <t t-set="condp" t-value="'D:15'"/>
                 </t>
+                <t t-if="condp == 25">
+                    <t t-set="condp" t-value="'D:40'"/>
+                </t>
                 <t t-set="fundo" t-value="'O'"/>
                 <t t-set="tipcomp" t-value="xml.get('document_type')"/>
                 <t t-set="descuento" t-value="format_float(xml.get('total_price_discount'), currency_precision) if not record.currency_id.is_zero(xml.get('total_price_discount')) else None"/>
