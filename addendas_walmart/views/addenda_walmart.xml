@@ -28,7 +28,13 @@
                 <t t-if="condp == 14">
                     <t t-set="condp" t-value="'D:30'"/>
                 </t>
+                <t t-if="condp == 28">
+                    <t t-set="condp" t-value="'D:30'"/>
+                </t>
                 <t t-if="condp == 13">
+                    <t t-set="condp" t-value="'D:45'"/>
+                </t>
+                <t t-if="condp == 29">
                     <t t-set="condp" t-value="'D:45'"/>
                 </t>
                 <t t-if="condp == 15">
@@ -40,6 +46,16 @@
                 <t t-if="condp == 25">
                     <t t-set="condp" t-value="'D:40'"/>
                 </t>
+                <t t-if="condp == 51">
+                    <t t-set="condp" t-value="'D:31'"/>
+                </t>
+                <t t-if="condp == 37">
+                    <t t-set="condp" t-value="'D:31'"/>
+                </t>
+                <t t-if="condp == 39">
+                    <t t-set="condp" t-value="'D:35'"/>
+                </t>
+               
                 <t t-set="fundo" t-value="'O'"/>
                 <t t-set="tipcomp" t-value="xml.get('document_type')"/>
                 <t t-set="descuento" t-value="format_float(xml.get('total_price_discount'), currency_precision) if not record.currency_id.is_zero(xml.get('total_price_discount')) else None"/>
